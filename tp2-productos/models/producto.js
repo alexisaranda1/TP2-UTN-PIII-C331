@@ -1,53 +1,57 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../data/db");
-const Marca = require("./marca"); // Importamos el modelo Marca
+const Marca = require("./marca");
 
 const Producto = sequelize.define("Producto", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   nombre: {
     type: DataTypes.STRING(100),
-    allowNull: false
+    allowNull: false,
   },
   descripcion: {
-    type: DataTypes.TEXT
+    type: DataTypes.TEXT,
   },
+  imagen: {
+    type: DataTypes.STRING(255),
+    allowNull: true, // Permitir valores nulos explícitamente
+  },
+  
   precio: {
     type: DataTypes.DECIMAL(10, 2),
-    allowNull: false
+    allowNull: false,
   },
-  tipo: {
-    type: DataTypes.STRING(50)
+  categoria: { // Asegúrate de que no tenga tildes
+    type: DataTypes.STRING(50),
   },
-  status: {
-    type: DataTypes.ENUM('active', 'inactive'),
-    defaultValue: 'active'
+  estado: {
+    type: DataTypes.ENUM("activo", "inactivo"),
+    defaultValue: "activo",
   },
   marcaId: {
     type: DataTypes.INTEGER,
     references: {
       model: Marca,
-      key: 'id'
-    }
+      key: "id",
+    },
   },
   createAt: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
+    defaultValue: DataTypes.NOW,
   },
   updateAt: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
+    defaultValue: DataTypes.NOW,
+  },
 }, {
   timestamps: false,
-  tableName: 'productos'
+  tableName: "producto",
 });
 
-// Definimos la relación de uno a muchos (1:N) entre Producto y Marca
-Producto.belongsTo(Marca, { foreignKey: 'marcaId' });
-Marca.hasMany(Producto, { foreignKey: 'marcaId' });
+Producto.belongsTo(Marca, { foreignKey: "marcaId" });
+Marca.hasMany(Producto, { foreignKey: "marcaId" });
 
 module.exports = Producto;

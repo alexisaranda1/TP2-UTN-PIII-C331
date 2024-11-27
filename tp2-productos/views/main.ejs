@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head') %>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <section class="welcome">
+      <h1>Bienvenidos a <%= nombre %></h1>
+      <p>Encuentra los mejores productos electrónicos y componentes para tu PC.</p>
+    </section>
+  
+    <section class="featured-products">
+      <h2 id="productos-destacados">Productos Destacados</h2>
+      <div id="carouselProducts" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% productos.forEach((producto, index) => { %>
+            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+              <div class="card text-center product-card">
+                <img src="<%= producto.imagen %>" class="card-img-top" alt="<%= producto.nombre %>">
+                <div class="card-body">
+                  <h5 class="card-title"><%= producto.nombre %></h5>
+                  <p class="card-text"><%= producto.descripcion %></p>
+                  <a href="#" class="btn btn-primary">Comprar ahora</a>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselProducts" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselProducts" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+    </section>
+  
+    <section class="featured">
+      <h2>Nuevos lanzamientos</h2>
+      <div class="products">
+        <% productos.forEach(producto => { %>
+          <div class="product">
+            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+            <h3><%= producto.nombre %></h3>
+            <p>$<%= producto.precio %></p>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  
+    <section class="featured">
+      <h2>Productos en oferta</h2>
+      <div class="products">
+        <% productos.filter(producto => producto.enOferta).forEach(producto => { %>
+          <div class="product">
+            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+            <h3><%= producto.nombre %></h3>
+            <p>$<%= producto.precio %> <%= producto.descuento ? producto.descuento + '% OFF' : '' %></p>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  
+    <section class="featured">
+      <h2>Nuestros productos</h2>
+      <div class="products">
+        <% productos.forEach(producto => { %>
+          <div class="product">
+            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+            <h3><%= producto.nombre %></h3>
+            <p>$<%= producto.precio %></p>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+</body>
+</html>

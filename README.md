@@ -2,188 +2,318 @@
 <br/>
 <br/>
 
-# Trabajo Práctico Parte 2 — Node.js Express
+## Documentación Swagger
 
-## Objetivo
+Accede a la documentación de la API en formato Swagger a través del siguiente enlace:
 
-El objetivo de este trabajo práctico es que los estudiantes desarrollen una API utilizando Node.js, Express, MySQL y Sequelize, demostrando sus conocimientos en el manejo del backend, estructura de proyectos y operaciones CRUD.
+[Documentación Swagger](http://localhost:3000/documentacion/)
 
-Se valorará la organización del código, el uso de buenas prácticas y la implementación de funcionalidades adicionales especificadas.
-<br/>
-<br/>
 
-## Requisitos
+## Acceso a la Vista
+La aplicación tiene una vista renderizada accesible en:
 
-### **Stack Tecnológico Obligatorio**
+- **URL**: [http://localhost:3000/](http://localhost:3000/)
 
-- Node.js
-- Express.js
-- MySQL
-- Sequelize ORM
 
-**Opcional:** Puede incluir otras herramientas y librerías (como Dotenv, Postman para probar la API, etc.).
-<br/>
-<br/>
+# Documentación de la API de Productos y de la API de Marcas
 
-## Desarrollo del trabajo práctico
+## Endpoints Disponibles
 
-- Se deberá clonar o "forkear" este repositorio para poder modificarlo y completarlo con la resolución del proyecto.
-- Una vez que su código esté listo, suba el código a un repositorio público propio y envíenos el enlace a dicho repositorio para que lo revisemos.
-  <br/>
-  <br/>
+### Crear un Producto
+- **URL**: `http://localhost:3000/productos`
+- **Método**: `POST`
+- **Descripción**: Permite crear un nuevo producto.
+- **Body** (JSON):
+  ```json
+  {
+    "nombre": "Nombre del producto",
+    "descripcion": "Descripción del producto",
+    "precio": 100.50,
+    "categoria": "Categoría del producto",
+    "imagen": "URL de la imagen",
+    "estado": "activo",
+    "marcaId": 1
+  }
+  ```
+- **Respuesta exitosa** (201):
+  ```json
+  {
+    "id": 1,
+    "nombre": "Nombre del producto",
+    "descripcion": "Descripción del producto",
+    "precio": 100.50,
+    "categoria": "Categoría del producto",
+    "imagen": "URL de la imagen",
+    "estado": "activo",
+    "marcaId": 1,
+    "createAt": "2024-11-26T00:00:00.000Z",
+    "updateAt": "2024-11-26T00:00:00.000Z"
+  }
+  ```
 
-## Trabajo Práctico
+### Obtener Todos los Productos
+- **URL**: `http://localhost:3000/productos`
+- **Método**: `GET`
+- **Descripción**: Devuelve todos los productos disponibles.
+- **Respuesta exitosa** (200):
+  ```json
+  [
+    {
+      "id": 1,
+      "nombre": "Producto 1",
+      "descripcion": "Descripción del producto 1",
+      "precio": 50.00,
+      "categoria": "Categoría 1",
+      "imagen": "URL",
+      "estado": "activo",
+      "marcaId": 1,
+      "createAt": "2024-11-26T00:00:00.000Z",
+      "updateAt": "2024-11-26T00:00:00.000Z"
+    }
+  ]
+  ```
 
-**Crear una API temática libre**
+#### Parámetros de Filtro
 
-Elija un tema para su API.
-Ejemplo: una biblioteca digital, gestión de películas, catálogo de productos, etc.
+1. **Filtro por categoría**:
+   - **Ejemplo**: `http://localhost:3000/productos?categoria=electrodomésticos`
+   - Devuelve los productos que coinciden con la categoría especificada.
 
-<br/>
+2. **Filtro por estado**:
+   - **Ejemplo**: `http://localhost:3000/productos?estado=activo`
+   - Devuelve los productos que tienen el estado activo.
 
-**Estructura de Carpetas**
+3. **Filtro por precio**:
+   - **Ejemplo**:
+     - `http://localhost:3000/productos?precioMin=50&precioMax=200`
+     - Devuelve los productos con un precio entre 50 y 200.
 
-Organice el proyecto respetando esta estructura básica:
+4. **Filtro por Marca**:
+   - **Ejemplo**: `http://localhost:3000/productos?marcaId=1`
+   - Devuelve los productos asociados a la marca con ID 1.
 
-src/<br/>
-├── controllers/<br/>
-├── models/<br/>
-├── routes/<br/>
-├── data/<br/>
-└── app.js<br/>
+5. **Búsqueda por texto en descripción**:
+   - **Ejemplo**: `http://localhost:3000/productos?descripcion=tecnología`
+   - Devuelve productos cuya descripción contenga la palabra "tecnología".
 
-## Detalles
+6. **Búsqueda por IDs específicos**:
+   - **Ejemplo**: `http://localhost:3000/productos?ids=1,3,5`
+   - Devuelve los productos con los IDs 1, 3 y 5.
 
-**Base de Datos**
+### Obtener un Producto por ID
+- **URL**: `http://localhost:3000/productos/:id`
+- **Método**: `GET`
+- **Descripción**: Devuelve un producto específico según su ID.
+- **Respuesta exitosa** (200):
+  ```json
+  {
+    "id": 1,
+    "nombre": "Producto 1",
+    "descripcion": "Descripción del producto 1",
+    "precio": 50.00,
+    "categoria": "Categoría 1",
+    "imagen": "URL",
+    "estado": "activo",
+    "marcaId": 1,
+    "createAt": "2024-11-26T00:00:00.000Z",
+    "updateAt": "2024-11-26T00:00:00.000Z"
+  }
+  ```
 
-Se debe realizar la conexión con una base de datos **MySQL**.
+### Actualizar un Producto
+- **URL**: `http://localhost:3000/productos/:id`
+- **Método**: `PUT`
+- **Descripción**: Actualiza la información de un producto existente.
+- **Body** (JSON):
+  ```json
+  {
+    "nombre": "Nuevo nombre",
+    "descripcion": "Nueva descripción",
+    "precio": 200.00,
+    "categoria": "Nueva categoría",
+    "imagen": "Nueva URL",
+    "estado": "inactivo",
+    "marcaId": 2
+  }
+  ```
+- **Respuesta exitosa** (200):
+  ```json
+  {
+    "message": "Producto actualizado",
+    "producto": {
+      "id": 1,
+      "nombre": "Nuevo nombre",
+      "descripcion": "Nueva descripción",
+      "precio": 200.00,
+      "categoria": "Nueva categoría",
+      "imagen": "Nueva URL",
+      "estado": "inactivo",
+      "marcaId": 2,
+      "createAt": "2024-11-26T00:00:00.000Z",
+      "updateAt": "2024-11-26T00:00:00.000Z"
+    }
+  }
+  ```
 
-<br/>
+### Eliminar un Producto
+- **URL**: `http://localhost:3000/productos/:id`
+- **Método**: `DELETE`
+- **Descripción**: Elimina un producto según su ID.
+- **Respuesta exitosa** (200):
+  ```json
+  {
+    "message": "Producto eliminado"
+  }
+  ```
 
-**Modelos**
+### Ordenar Resultados
+- **Parámetro**: `orden`
+  - Valores posibles: `asc` (ascendente) o `desc` (descendente).
+  - Campo de ordenación: `nombre`, `precio`, `categoria`.
 
-Necesitará construir los siguientes Modelos:
+#### Ejemplo de uso:
+1. **Orden ascendente por nombre**:
+   - `http://localhost:3000/productos?orden=asc&campo=nombre`
+2. **Orden descendente por precio**:
+   - `http://localhost:3000/productos?orden=desc&campo=precio`
 
-<br/>
+---
 
-- Un modelo que represente una entidad principal de su temática **Minimo 6 propiedades**
-  <br/>
 
-  > Deberá incluir lo siguiente:
-  >
-  > - `id` (autoincremental)
-  > - `createdAt` (fecha de creación, automática)
-  > - `updatedAt` (fecha de actualización, automática)
-  > - `type/categorie` (campo tipo o categoría, personalizado)
-  > - `status` (mínimo 2 opciones: `active`, `inactive`)
-  > - 1 propiedad adicional (de acuerdo al tema elegido).
+# Documentación de la API de Marcas
 
-<br/>
-<br/>
+## Endpoints Disponibles
 
-- Un modelo para manejar autores **Minimo 5 propiedades**
-  <br/>
+### 1. Crear una Marca
+**URL:** `http://localhost:3000/marcas`  
+**Método:** `POST`  
+**Descripción:** Permite crear una nueva marca.
 
-  > Deberá incluir lo siguiente:
-  >
-  > - `id` (autoincremental)
-  > - `createdAt` (fecha de creación, automática)
-  > - `updatedAt` (fecha de actualización, automática)
-  > - `name` (nombre del autor)
-  > - `surname` (apellido del autor)
+**Body (JSON):**
+```json
+{
+  "nombre": "Nombre de la marca",
+  "descripcion": "Descripción de la marca"
+}
+```
 
-<br/>
-<br/>
+**Respuesta exitosa (201):**
+```json
+{
+  "id": 1,
+  "nombre": "Nombre de la marca",
+  "descripcion": "Descripción de la marca",
+  "createAt": "2024-11-26T00:00:00.000Z",
+  "updateAt": "2024-11-26T00:00:00.000Z"
+}
+```
 
-**Rutas y Controladores**
+---
 
-Necesitará construir las siguientes Rutas y Controladores:
+### 2. Obtener Todas las Marcas
+**URL:** `http://localhost:3000/marcas`  
+**Método:** `GET`  
+**Descripción:** Devuelve todas las marcas disponibles.
 
-- Rutas para el Modelo Personalizado **Minimo 5 rutas**
-  <br/>
+**Respuesta exitosa (200):**
+```json
+[
+  {
+    "id": 1,
+    "nombre": "Marca 1",
+    "descripcion": "Descripción de la marca 1",
+    "createAt": "2024-11-26T00:00:00.000Z",
+    "updateAt": "2024-11-26T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Marca 2",
+    "descripcion": "Descripción de la marca 2",
+    "createAt": "2024-11-26T00:00:00.000Z",
+    "updateAt": "2024-11-26T00:00:00.000Z"
+  }
+]
+```
 
-  > Deberá incluir lo siguiente:
-  >
-  > - Crear un registro
-  > - Actualizar por ID
-  > - Leer todos los registros
-  > - Leer un registro por ID
-  > - Eliminar un registro por ID
+**Parámetros de Filtro:**
+- **`nombre`**: Filtra las marcas cuyo nombre contenga el valor especificado.  
+  Ejemplo: `http://localhost:3000/marcas?nombre=Apple`
+- **`descripcion`**: Filtra las marcas cuya descripción contenga el valor especificado.  
+  Ejemplo: `http://localhost:3000/marcas?descripcion=tecnología`
+- **`ids`**: Filtra las marcas cuyos IDs coincidan con los valores especificados (separados por comas).  
+  Ejemplo: `/marcas?ids=1,2,3`
 
-<br/>
-<br/>
+**Parámetros de Ordenamiento:**
+- **`sort`**: Ordena los resultados. Valores posibles: `ASC` o `DESC`.  
+  Ejemplo: `http://localhost:3000/marcas?sort=ASC`
 
-- Rutas para el Modelo Autor **Minimo 4 rutas**
-  <br/>
+**Parámetros de Paginación:**
+- **`page`**: Especifica el número de página.  
+  Ejemplo: `http://localhost:3000/marcas?page=2`
+- **`limit`**: Especifica la cantidad de resultados por página.  
+  Ejemplo: `http://localhost:3000/marcas?limit=5`
 
-  > Deberá incluir lo siguiente:
-  >
-  > - Crear un autor
-  > - Leer todos los autores
-  > - Leer un autor por ID
-  > - Eliminar un autor por ID
+---
 
-<br/>
-<br/>
+### 3. Obtener una Marca por ID
+**URL:** `http://localhost:3000/marcas/:id`  
+**Método:** `GET`  
+**Descripción:** Devuelve una marca específica según su ID.
 
-## Opcionales
+**Respuesta exitosa (200):**
+```json
+{
+  "id": 1,
+  "nombre": "Nombre de la marca",
+  "descripcion": "Descripción de la marca",
+  "createAt": "2024-11-26T00:00:00.000Z",
+  "updateAt": "2024-11-26T00:00:00.000Z"
+}
+```
 
-**Query Params**
+**Respuesta en caso de error (404):**
+```json
+{
+  "message": "Marca no encontrada"
+}
+```
 
-Incluya las siguientes funcionalidades adicionales en las rutas de **"Leer todos los registros"** para el modelo personalizado:
+---
 
-1. **Paginado**
+### 4. Eliminar una Marca
+**URL:** `http://localhost:3000/marcas/:id`  
+**Método:** `DELETE`  
+**Descripción:** Elimina una marca según su ID.
 
-   - Permita la paginación con parámetros `page` y `limit`.
+**Respuesta exitosa (200):**
+```json
+{
+  "message": "Marca eliminada"
+}
+```
 
-2. **Ordenado por Fecha de Creación**
+**Respuesta en caso de error (404):**
+```json
+{
+  "message": "Marca no encontrada"
+}
+```
 
-   - Soporte para ordenar por `createdAt` de forma ascendente (`ASC`) o descendente (`DESC`) mediante un parámetro `sort`.
+---
 
-3. **Filtrado por `type/categorie`**
+### Ejemplos de Uso
 
-   - Permita filtrar los registros según el valor del campo `type/categorie` utilizando un parámetro `type`.
+1. **Filtro por nombre y orden ascendente:**
+   - **URL:** `http://localhost:3000/marcas?nombre=Sony&sort=ASC`
+   - **Descripción:** Devuelve marcas cuyo nombre contenga "Sony" ordenadas de forma ascendente por la fecha de creación.
 
-4. **Filtrado por `status`**
-   - Permita filtrar los registros según el estado (`active`, `inactive`) utilizando un parámetro `status`.
+2. **Paginación con orden descendente:**
+   - **URL:** `http://localhost:3000/marcas?page=1&limit=2&sort=DESC`
+   - **Descripción:** Devuelve las primeras 2 marcas ordenadas en orden descendente por la fecha de creación.
 
-El resultado final deberia verse como: <br/>
-`GET /modeloPersonalizado?page=2&limit=5&sort=DESC&type=category1&status=active`
-<br/>
-<br/>
+3. **Combinación de filtros:**
+   - **URL:** `http://localhost:3000/marcas?ids=1,3&descripcion=tecnología&sort=ASC`
+   - **Descripción:** Devuelve las marcas con IDs 1 y 3 cuya descripción contenga "tecnología" ordenadas de forma ascendente por la fecha de creación.
 
-**Relación Autor-Modelo Personalizado (1:N)**
 
-1. Al crear un registro en el modelo personalizado, asócielo a un autor existente mediante su `idAutor`.
 
-<br/>
-<br/>
-
-## **Entrega**
-
-- Suba su código a un repositorio público en GitHub.
-- Incluya un archivo `README.md` con:
-  - Descripción breve de la API.
-  - Instrucciones para correr el proyecto localmente.
-  - Ejemplos de endpoints y cómo probarlos.
-- Archivos de ejemplos(seed) en formato json de cada modelo, para cargar la DDBB
-
-<br/>
-<br/>
-
-## **Comentarios Finales**
-
-Un dicho común en el desarrollo es:
-
-> "An API is just as good as its documentation"
->
-> — Common saying in backend development
-
-Por este motivo, vamos a valorar mucho este aspecto. Siéntase libre de utilizar librerías como **Swagger** para generar su documentación.
-
-<br/>
-<br/>
-
-## **Fecha de Entrega:**
-
-27/11

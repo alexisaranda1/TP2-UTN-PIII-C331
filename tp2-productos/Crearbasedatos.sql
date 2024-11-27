@@ -1,7 +1,7 @@
 
-CREATE SCHEMA `productosdb` DEFAULT CHARACTER SET utf8;
+CREATE SCHEMA `ElectroTech` DEFAULT CHARACTER SET utf8;
 
-CREATE TABLE `marcas` (
+CREATE TABLE `marca` ( 
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NOT NULL,
   `descripcion` TEXT,
@@ -10,16 +10,18 @@ CREATE TABLE `marcas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `productos` (
+CREATE TABLE `producto` ( 
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NOT NULL,
   `descripcion` TEXT,
+  `imagen` VARCHAR(255), 
   `precio` DECIMAL(10,2) NOT NULL,
-  `tipo` VARCHAR(50),
-  `status` ENUM('active', 'inactive') DEFAULT 'active',
-  `marcaId` INT NOT NULL,  -- Aquí referenciamos a la marca
+  `categoria` VARCHAR(50),
+  `estado` ENUM('activo', 'inactivo') DEFAULT 'activo',
+  `marcaId` INT NOT NULL,
   `createAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updateAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`marcaId`) REFERENCES `marcas`(`id`) ON DELETE CASCADE
+  FOREIGN KEY (`marcaId`) REFERENCES `marca`(`id`) ON DELETE CASCADE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

@@ -1,4 +1,8 @@
+const { Op } = require("sequelize");
 const Marca = require("../models/marca");
+
+
+
 
 // Crear una nueva marca
 const crearMarca = async (req, res) => {
@@ -11,15 +15,49 @@ const crearMarca = async (req, res) => {
   }
 };
 
-// Obtener todas las marcas
-const obtenerMarcas = async (req, res) => {
+// Obtener todas las marcasconst 
+obtenerMarcas = async (req, res) => {
   try {
-    const marcas = await Marca.findAll();
-    res.status(200).json(marcas);
+    const { page = 1, limit = 10, sort = "ASC", nombre, descripcion, fechaInicio, fechaFin, activo, sortBy = "createAt", ids } = req.query;
+
+    // Configuración para la paginación
+    const offset = (page - 1) * limit;
+    const filters = {};
+
+    // Filtros dinámicos
+    if (nombre) filters.nombre = { [Op.like]: `%${nombre}%` };
+    if (descripcion) filters.descripcion = { [Op.like]: `%${descripcion}%` };
+    if (fechaInicio && fechaFin) {
+      filters.createAt = { [Op.between]: [new Date(fechaInicio), new Date(fechaFin)] };
+    }
+    if (activo !== undefined) filters.activo = { [Op.eq]: activo === 'true' };
+
+    // Filtro para 'ids', convirtiéndolo en un array
+    if (ids) {
+      const idArray = ids.split(',').map(id => parseInt(id));  // Convertimos los ids en un array de números
+      filters.id = { [Op.in]: idArray };
+    }
+
+    // Obtener marcas con filtros, paginación y ordenamiento
+    const marcas = await Marca.findAndCountAll({
+      where: filters,
+      order: [[sortBy, sort.toUpperCase() === "DESC" ? "DESC" : "ASC"]],
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10),
+    });
+
+    // Respuesta con datos y metadata de paginación
+    res.status(200).json({
+      total: marcas.count,
+      page: parseInt(page, 10),
+      totalPages: Math.ceil(marcas.count / limit),
+      data: marcas.rows,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // Obtener una marca por ID
 const obtenerMarcaPorId = async (req, res) => {
