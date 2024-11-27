@@ -2,6 +2,55 @@
 <br/>
 <br/>
 
+
+## README.md
+
+### Alumno
+Alexis Aranda
+
+### Materia
+Programación III
+
+### Profesores
+Gabriel Muñoz e Ibrahim Rodríguez
+<br/>
+### Universidad
+Universidad Tecnológica Nacional (Avellaneda)
+<br/>
+### Proyecto
+API de Gestión de ElectroTech
+<br/>
+### Descripción
+Esta API de backend ha sido desarrollada para gestionar la información de una tienda de electrónica llamada ElectroTech. Utiliza Node.js, Express y Sequelize para interactuar con una base de datos MySQL. La API permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre productos y marcas, además de ofrecer funcionalidades avanzadas como paginación, filtrado y ordenación de registros.
+
+### Instalación
+Para instalar este proyecto, sigue estos pasos:
+<br/>
+1. **Clonar el repositorio:**
+
+   ```bash
+   git clone https://github.com/alexisaranda1/TP2-UTN-PIII-C331.git
+   cd TP2-UTN-PIII-C331
+<br/>
+2. **Instalar dependencias:**
+
+   ```bash
+   npm install
+
+<br/>
+3. **Configurar la base de datos:**
+
+   Utiliza el archivo `electroTech.sql` para crear la base de datos y probarla con los datos iniciales.
+   - Abre MySQL Workbench o tu herramienta preferida de gestion de base de datos.
+   - Conectate a tu servidor MySQL
+   - Ejecuta el contenido del archivo `electroTech.sql` para crear la base de datos, las tablas y probarlas con los datos iniciales.
+<br/>
+<br/>
+ 4. **Iniciar el servidor:**
+   ```bash
+   nodemon /app.js
+<br/>
+<br/> 
 ## Documentación Swagger
 
 Accede a la documentación de la API en formato Swagger a través del siguiente enlace:
