@@ -40,6 +40,13 @@ Para instalar este proyecto, sigue estos pasos:
    - Abre MySQL Workbench o tu herramienta preferida de gestion de base de datos.
    - Conectate a tu servidor MySQL
    - Ejecuta el contenido del archivo `electroTech.sql` para crear la base de datos, las tablas y probarlas con los datos iniciales.
+
+    **Importante: Configuración de credenciales**
+
+    Asegúrate de configurar correctamente las credenciales de tu base de datos en el archivo      `data\db.js`:
+
+
+  
 <br/>
 <br/>
 
@@ -408,7 +415,7 @@ tp2-productos/
     * main.ejs
 * .env
 * app.js
-* Crearbasedatos.sql
+* electroTech.sql
 * package-lock.json
 * package.json
 * Requisitos.md
