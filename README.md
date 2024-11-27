@@ -5,18 +5,14 @@
 
 ## README.md
 
-### Alumno
-Alexis Aranda
+### Alumno :Alexis Aranda
 
-### Materia
-Programación III
+### Materia : Programación III
 
-### Profesores
-Gabriel Muñoz e Ibrahim Rodríguez
-<br/>
-### Universidad
-Universidad Tecnológica Nacional (Avellaneda)
-<br/>
+### Profesores :Gabriel Muñoz e Ibrahim Rodríguez
+
+### Universidad : Universidad Tecnológica Nacional (Avellaneda)
+
 ### Proyecto
 API de Gestión de ElectroTech
 <br/>
@@ -25,19 +21,19 @@ Esta API de backend ha sido desarrollada para gestionar la información de una t
 
 ### Instalación
 Para instalar este proyecto, sigue estos pasos:
-<br/>
+
 1. **Clonar el repositorio:**
 
    ```bash
    git clone https://github.com/alexisaranda1/TP2-UTN-PIII-C331.git
-   cd TP2-UTN-PIII-C331
-<br/>
+
+
 2. **Instalar dependencias:**
 
    ```bash
    npm install
 
-<br/>
+
 3. **Configurar la base de datos:**
 
    Utiliza el archivo `electroTech.sql` para crear la base de datos y probarla con los datos iniciales.
@@ -46,11 +42,11 @@ Para instalar este proyecto, sigue estos pasos:
    - Ejecuta el contenido del archivo `electroTech.sql` para crear la base de datos, las tablas y probarlas con los datos iniciales.
 <br/>
 <br/>
- 4. **Iniciar el servidor:**
+4. **Iniciar el servidor:**
    ```bash
-   nodemon /app.js
+   npx nodemon app.js
+
 <br/>
-<br/> 
 ## Documentación Swagger
 
 Accede a la documentación de la API en formato Swagger a través del siguiente enlace:
