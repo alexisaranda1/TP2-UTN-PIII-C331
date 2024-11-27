@@ -42,6 +42,7 @@ Para instalar este proyecto, sigue estos pasos:
    - Ejecuta el contenido del archivo `electroTech.sql` para crear la base de datos, las tablas y probarlas con los datos iniciales.
 <br/>
 <br/>
+
 4. **Iniciar el servidor:**
    ```bash
    npx nodemon app.js
