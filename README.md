@@ -15,6 +15,7 @@ La aplicación tiene una vista renderizada accesible en:
 - **URL**: [http://localhost:3000/](http://localhost:3000/)
 
 
+
 # Documentación de la API de Productos y de la API de Marcas
 
 ## Endpoints Disponibles
@@ -316,4 +317,53 @@ La aplicación tiene una vista renderizada accesible en:
    - **Descripción:** Devuelve las marcas con IDs 1 y 3 cuya descripción contenga "tecnología" ordenadas de forma ascendente por la fecha de creación.
 
 
+
+
+
+**Estructura de Carpetas**
+
+tp2-productos/
+* assets/
+    * carriamarillo.png
+    * carriblanco.png
+    * carrito.png
+    * facebook.svg
+    * instagram.svg
+    * linkedin.svg
+    * pinterest.svg
+    * utn_logo.svg
+    * youtube.svg
+* config/
+    * swagger.js
+* controllers/
+    * marcaController.js
+    * productoController.js
+* data/
+    * db.js
+* models/
+    * marca.js
+    * producto.js
+* public/
+    * css/
+        * signin.css
+        * signUp.css
+        * style.css
+* routes/
+    * categoriasRouter.js
+    * mainRouter.js
+    * marcaRoutes.js
+    * productoRoutes.js
+* views/
+    * partials/
+        * footer.ejs
+        * head.ejs
+        * header.ejs
+        * script.ejs
+    * main.ejs
+* .env
+* app.js
+* Crearbasedatos.sql
+* package-lock.json
+* package.json
+* Requisitos.md
 
