@@ -1,6 +1,8 @@
 
 CREATE SCHEMA `ElectroTech` DEFAULT CHARACTER SET utf8;
 
+USE `ElectroTech`;
+
 CREATE TABLE `marca` ( 
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NOT NULL,
